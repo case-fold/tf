@@ -11,7 +11,7 @@ resource "github_team" "test_team_0" {
 resource "github_team_membership" "test_team_0_ling" {
   team_id  = "${github_team.test_team_0.id}"
   username = "Emmawaterman"
-  role     = "member"
+  role     = "maintainer"
 }
 
 resource "github_team_membership" "test_team_0_yl" {
