@@ -1,0 +1,17 @@
+organization: case-fold
+
+teams:
+  - test-0
+  - test-1
+
+team_memberships:
+  test-0:
+    maintainer:
+      - Emmawaterman
+      - gkilleen
+    member:
+      - yunzhu-li
+  test-1:
+    maintainer:
+      - gkilleen
+      - yunzhu-li

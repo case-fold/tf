@@ -1,0 +1,27 @@
+# Organization
+provider "github" {
+  organization = "{{(datasource "config").organization}}"
+}
+
+# Teams
+{{ $teams := (datasource "config").teams }}
+{{ range $teams }}
+  resource "github_team" "team_{{.}}" {
+    name        = "{{.}}"
+    privacy     = "closed"
+  }
+{{- end}}
+
+# Team memberships
+{{ $team_memberships := (datasource "config").team_memberships }}
+{{ range $team, $roles := $team_memberships }}
+  {{ range $role, $members := $roles }}
+    {{ range $members }}
+      resource "github_team_membership" "team_membership_{{$team}}_{{.}}" {
+        team_id  = "${github_team.team_{{$team}}.id}"
+        username = "{{.}}"
+        role     = "{{$role}}"
+      }
+    {{- end}}
+  {{- end}}
+{{- end}}
